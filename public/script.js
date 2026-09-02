@@ -71,11 +71,13 @@ async function verifyPhone() {
   setLoading(out, btn, input, true);
 
   try {
-    const res = await fetch(`/api/verify-phone?number=${encodeURIComponent(normalized.value)}`);
+    const url = `https://apilayer.net/api/validate?access_key=${API_KEYS.numverify}`
+      + `&number=${encodeURIComponent(normalized.value)}&format=1`;
+    const res = await fetch(url);
     const data = await res.json();
 
-    if (!res.ok) {
-      out.innerHTML = `<span class="error">${escapeHtml(data.error || 'Verification failed.')}</span>`;
+    if (!res.ok || data.error) {
+      out.innerHTML = `<span class="error">${escapeHtml(data.error?.info || data.message || 'Verification failed.')}</span>`;
       return;
     }
 
@@ -120,11 +122,13 @@ async function verifyEmail() {
   setLoading(out, btn, input, true);
 
   try {
-    const res = await fetch(`/api/verify-email?email=${encodeURIComponent(email)}`);
+    const url = `https://api.apilayer.net/mailboxlayer/api/check?access_key=${API_KEYS.mailboxlayer}`
+      + `&email=${encodeURIComponent(email)}&smtp=1&format=1`;
+    const res = await fetch(url);
     const data = await res.json();
 
-    if (!res.ok) {
-      out.innerHTML = `<span class="error">${escapeHtml(data.error || 'Verification failed.')}</span>`;
+    if (!res.ok || data.error) {
+      out.innerHTML = `<span class="error">${escapeHtml(data.error?.info || data.message || 'Verification failed.')}</span>`;
       return;
     }
 
