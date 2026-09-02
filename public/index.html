@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact Verification</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>Contact Verification</h1>
+    <p class="subtitle">Check whether a phone number or email address is real and deliverable.</p>
+
+    <section class="form-group">
+      <label for="phone">Phone number</label>
+      <div class="row">
+        <input type="tel" id="phone" placeholder="+14158586273" />
+        <button id="phone-btn">Verify</button>
+      </div>
+      <div id="phone-result" class="result"></div>
+    </section>
+
+    <section class="form-group">
+      <label for="email">Email address</label>
+      <div class="row">
+        <input type="email" id="email" placeholder="name@example.com" />
+        <button id="email-btn">Verify</button>
+      </div>
+      <div id="email-result" class="result"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
