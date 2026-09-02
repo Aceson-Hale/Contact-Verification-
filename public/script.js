@@ -169,3 +169,22 @@ document.getElementById('phone').addEventListener('keydown', (e) => {
 document.getElementById('email').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') verifyEmail();
 });
+
+function syncThemeToggle(theme) {
+  const toggle = document.getElementById('theme-toggle');
+  toggle.textContent = theme === 'light' ? '☀️' : '🌙';
+  toggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  syncThemeToggle(theme);
+}
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  setTheme(current === 'light' ? 'dark' : 'light');
+});
+
+syncThemeToggle(document.documentElement.getAttribute('data-theme'));

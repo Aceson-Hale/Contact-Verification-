@@ -3,12 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <title>Contact Verification</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="card">
-    <h1>Contact Verification</h1>
+    <div class="header-row">
+      <h1>Contact Verification</h1>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode">🌙</button>
+    </div>
     <p class="subtitle">Check whether a phone number or email address is real and deliverable.</p>
 
     <section class="form-group">
