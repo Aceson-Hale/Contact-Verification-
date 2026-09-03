@@ -1,46 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script>
+<!DOCTYPE html> <!-- Tells the browser to use modern HTML5 parsing rules -->
+<html lang="en"> <!-- "lang" helps screen readers and search engines know this page is in English -->
+<head> <!-- *Metadata about the page, not shown on screen: charset, viewport, title, styles, and the theme script below* -->
+<meta charset="UTF-8" /> <!-- Character encoding, so text (and the emoji below) display correctly -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Makes the page render at the device's actual width instead of a zoomed-out desktop layout -->
+<script> <!-- *This is an inline script, not a link to script.js -- it runs immediately to decide light or dark mode before the page paints* -->
   (function () {
     var saved = localStorage.getItem('theme');
     var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', theme);
-  })();
+  })(); //*Applies the chosen theme right away, before the CSS renders, so there's no flash of the wrong colors on load*
 </script>
-<title>Contact Verification</title>
-<link rel="stylesheet" href="style.css" />
+<title>Contact Verification</title> <!-- Text shown in the browser tab -->
+<link rel="stylesheet" href="style.css" /> <!-- Loads the CSS file that styles this page -->
 </head>
-<body>
-  <main class="card">
-    <div class="header-row">
-      <h1>Contact Verification</h1>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode">🌙</button>
-    </div>
-    <p class="subtitle">Check whether a phone number or email address is real and deliverable.</p>
+<body> <!-- *Everything the visitor actually sees goes here -- the <head> above is invisible* -->
+  <main class="card"> <!-- *<main> is the actual semantic part -- it marks this as the page's primary content; "card" is just a CSS class for styling, not semantics* -->
+    <div class="header-row"> <!-- *A <div> is not semantic -- it's a generic, meaningless container. This one just lays the title and toggle button out side by side* -->
+      <h1>Contact Verification</h1> <!-- *Semantic heading: the page's main title (kept the "semantic" label here since h1 really is one)* -->
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode">🌙</button> <!-- *Click handler lives in script.js; 🌙 is just the default shown before script.js corrects it to match the real theme* -->
+    </div> <!-- *Closes header-row -- still a <div>, so still not "semantic", just ending the container* -->
+    <p class="subtitle">Check whether a phone number or email address is real and deliverable.</p> <!-- *Plain description text under the title* -->
 
-    <section class="form-group">
-      <label for="phone">Phone number</label>
-      <div class="row">
-        <input type="tel" id="phone" placeholder="+14158586273" />
-        <button id="phone-btn">Verify</button>
-      </div>
-      <div id="phone-result" class="result"></div>
+    <section class="form-group"> <!-- *<section> is a real semantic element -- this one groups the phone input, its button, and its result together* -->
+      <label for="phone">Phone number</label> <!-- *Semantic label; "for" links it to the input below by id, so clicking the label focuses the input* -->
+      <div class="row"> <!-- Not semantic, just a container that lays the input and button out side by side -->
+        <input type="tel" id="phone" placeholder="+14158586273" /> <!-- *Text field for the phone number; type="tel" gives mobile devices a numeric keypad* -->
+        <button id="phone-btn">Verify</button> <!-- *Runs verifyPhone() in script.js when clicked* -->
+      </div> <!-- *end .row -- again, not semantic, just ending the container* -->
+      <div id="phone-result" class="result"></div> <!-- *Empty on load; script.js fills this in with the verification result. Not "semantic", just a plain div JS writes into* -->
     </section>
 
-    <section class="form-group">
-      <label for="email">Email address</label>
+    <section class="form-group"> <!-- Same structure as above, for the email field -->
+      <label for="email">Email address</label> <!-- Linked to the input below by id -->
       <div class="row">
-        <input type="email" id="email" placeholder="name@example.com" />
-        <button id="email-btn">Verify</button>
+        <input type="email" id="email" placeholder="name@example.com" /> <!-- type="email" gives mobile devices an @-key keyboard -->
+        <button id="email-btn">Verify</button> <!-- Runs verifyEmail() in script.js when clicked -->
       </div>
-      <div id="email-result" class="result"></div>
+      <div id="email-result" class="result"></div> <!-- Empty on load; script.js fills this in with the verification result -->
     </section>
   </main>
 
-  <script src="config.js"></script>
-  <script src="script.js"></script>
+  <script src="config.js"></script> <!-- Loads your API keys as the API_KEYS object, used by script.js -->
+  <script src="script.js"></script> <!-- The app's actual logic: input validation, the API calls, and the theme toggle's click handler -->
 </body>
 </html>
